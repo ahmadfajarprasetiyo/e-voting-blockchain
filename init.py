@@ -77,6 +77,22 @@ os.system("cp 1.hash node1/1.hash")
 os.system("cp 1.res node1/1.res")
 os.system("cp 1.trx node1/1.trx")
 
+os.system("cp 1.hash node2/1.hash")
+os.system("cp 1.res node2/1.res")
+os.system("cp 1.trx node2/1.trx")
+
+os.system("cp 1.hash node3/1.hash")
+os.system("cp 1.res node3/1.res")
+os.system("cp 1.trx node3/1.trx")
+
+os.system("cp 1.hash node4/1.hash")
+os.system("cp 1.res node4/1.res")
+os.system("cp 1.trx node4/1.trx")
+
+os.system("cp 1.hash node5/1.hash")
+os.system("cp 1.res node5/1.res")
+os.system("cp 1.trx node5/1.trx")
+
 
 
 
