@@ -11,6 +11,8 @@ const node = [
   'http://localhost:5005'
 ]
 
+const choice_e = [5, 13]
+
 app.get('/', (req, res) => res.send('Hello World!'))
 
 app.get('/trx', (req, res) => {
@@ -22,36 +24,36 @@ app.get('/trx', (req, res) => {
       sender_n: req.query.sender_n,
       sender_e: req.query.sender_e,
       sender_d: req.query.sender_d,
-      receiver_n: req.query.receiver_n,
-      receiver_e: req.query.receiver_e,
+      receiver_n: 39203,
+      receiver_e: choice_e[parseInt(req.query.choice)],
     }),
     axios.post(node[1] + '/trx', {
       sender_n: req.query.sender_n,
       sender_e: req.query.sender_e,
       sender_d: req.query.sender_d,
-      receiver_n: req.query.receiver_n,
-      receiver_e: req.query.receiver_e,
+      receiver_n: 39203,
+      receiver_e: choice_e[parseInt(req.query.choice)],
     }),
     axios.post(node[2] + '/trx', {
       sender_n: req.query.sender_n,
       sender_e: req.query.sender_e,
       sender_d: req.query.sender_d,
-      receiver_n: req.query.receiver_n,
-      receiver_e: req.query.receiver_e,
+      receiver_n: 39203,
+      receiver_e: choice_e[parseInt(req.query.choice)],
     }),
     axios.post(node[3] + '/trx', {
       sender_n: req.query.sender_n,
       sender_e: req.query.sender_e,
       sender_d: req.query.sender_d,
-      receiver_n: req.query.receiver_n,
-      receiver_e: req.query.receiver_e,
+      receiver_n: 39203,
+      receiver_e: choice_e[parseInt(req.query.choice)],
     }),
     axios.post(node[4] + '/trx', {
       sender_n: req.query.sender_n,
       sender_e: req.query.sender_e,
       sender_d: req.query.sender_d,
-      receiver_n: req.query.receiver_n,
-      receiver_e: req.query.receiver_e,
+      receiver_n: 39203,
+      receiver_e: choice_e[parseInt(req.query.choice)],
     }),
   ])
     .then(function (responses) {
