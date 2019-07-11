@@ -97,7 +97,3 @@ def vote(sender_n, sender_e, sender_d, receiver_n, receiver_e):
 
     return valid
 
-
-
-
-print(vote(39203, 17, 13697, 39203, 13))
