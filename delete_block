@@ -1,0 +1,8 @@
+rm *.trx
+rm *.res
+rm *.hash
+rm key.pri
+rm */*.trx
+rm */*.res
+rm */*.hash
+
