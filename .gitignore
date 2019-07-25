@@ -1,4 +1,11 @@
 .env
 .vscode
 */__pycache__
-
+*.trx
+*.hash
+*.res
+*/*.trx
+*/*.hash
+*/*.res
+key.pri
+*.swp
