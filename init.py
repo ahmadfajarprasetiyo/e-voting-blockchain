@@ -1,4 +1,5 @@
 import math
+import pickle
 import csv
 import hashlib
 import os
@@ -37,10 +38,13 @@ x = lcm(p - 1,q - 1)
 data_res = [['n', 'e', 'saldo']]
 data_private_key = [['n', 'e', 'd']]
 
+with open('key.pub', 'rb') as input:
+  public_key = pickle.load(input)
+
 for e in primes:
     d = inverse_mod(e, x)
     if d is not None:
-        data_res.append([n, e, 10])
+        data_res.append([n, e, public_key.raw_encrypt(10)])
         data_private_key.append([n, e, d])
 
 
@@ -76,22 +80,27 @@ hash_file.close()
 os.system("cp 1.hash node1/1.hash")
 os.system("cp 1.res node1/1.res")
 os.system("cp 1.trx node1/1.trx")
+os.system("cp key.pub node1/key.pub")
 
 os.system("cp 1.hash node2/1.hash")
 os.system("cp 1.res node2/1.res")
 os.system("cp 1.trx node2/1.trx")
+os.system("cp key.pub node2/key.pub")
 
 os.system("cp 1.hash node3/1.hash")
 os.system("cp 1.res node3/1.res")
 os.system("cp 1.trx node3/1.trx")
+os.system("cp key.pub node3/key.pub")
 
 os.system("cp 1.hash node4/1.hash")
 os.system("cp 1.res node4/1.res")
 os.system("cp 1.trx node4/1.trx")
+os.system("cp key.pub node4/key.pub")
 
 os.system("cp 1.hash node5/1.hash")
 os.system("cp 1.res node5/1.res")
 os.system("cp 1.trx node5/1.trx")
+os.system("cp key.pub node5/key.pub")
 
 
 
