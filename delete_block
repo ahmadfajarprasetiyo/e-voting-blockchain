@@ -1,8 +1,10 @@
 rm *.trx
 rm *.res
 rm *.hash
-rm key.pri
+rm *.pri
 rm */*.trx
 rm */*.res
 rm */*.hash
-
+rm *.pub
+rm */*.pub
+rm */*.pri

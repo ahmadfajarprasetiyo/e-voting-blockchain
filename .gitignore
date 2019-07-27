@@ -7,9 +7,8 @@
 */*.trx
 */*.hash
 */*.res
-key.pri
 *.swp
-key.pub
-key.pri
-*/key.pub
-*/key.pri
+*.pub
+*.pri
+*/*.pub
+*/*.pri
