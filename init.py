@@ -52,7 +52,7 @@ with open('1.res', 'w') as writeFile:
     writer = csv.writer(writeFile)
     writer.writerows(data_res)
 
-with open('key.pri', 'w') as writeFile:
+with open('key_blockchain.pri', 'w') as writeFile:
     writer = csv.writer(writeFile)
     writer.writerows(data_private_key)
 
