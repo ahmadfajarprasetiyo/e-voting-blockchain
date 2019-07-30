@@ -1,0 +1,8 @@
+rm node2/node_raft.js
+rm node3/node_raft.js
+rm node4/node_raft.js
+rm node5/node_raft.js
+cp node1/node_raft.js node2/node_raft.js
+cp node1/node_raft.js node3/node_raft.js
+cp node1/node_raft.js node4/node_raft.js
+cp node1/node_raft.js node5/node_raft.js
