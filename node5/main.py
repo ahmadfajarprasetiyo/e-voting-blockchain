@@ -14,10 +14,7 @@ def trx():
     receiver_n = int(content['receiver_n'])
     receiver_e = int(content['receiver_e'])
 
-    if logic.vote(sender_n, sender_e, sender_d, receiver_n, receiver_e):
-        return "1"
-    else:
-        return "0"
+    return logic.vote(sender_n, sender_e, sender_d, receiver_n, receiver_e):
 
 @app.route('/get_hash', methods=['GET'])
 def get_hash():
@@ -26,6 +23,6 @@ def get_hash():
     return logic.get_lastest_hash()
 
 if __name__ == '__main__':
-    app.run(host='localhost', port=5005, debug=True)
+    app.run(host='localhost', port=5001, debug=True)
 
 

@@ -24,7 +24,7 @@ const nodesComputation = [
   'http://localhost:5005',
 ]
 
-const thisNode = 2
+const thisNode = 0
 const port = nodesProxy[thisNode]
 var leaderNode = -1
 
@@ -155,7 +155,10 @@ app.get('/vote', (req, res) => {
       receiver_e: req.query.receiver_e,
     })
     .then(response => {
-      if(response.data == '1'){
+      if(response.data.length > 2){
+        var requestPoll = []
+
+
         for(var i=0; i< 5; i++){
           if(thisNode != i){
             requestPoll.push(
@@ -164,21 +167,26 @@ app.get('/vote', (req, res) => {
           }
         }
 
+        console.log('Send Commit to All Node')
         Promise.all(requestPoll.map(p => p.catch(() => undefined)))
         .then((responses) => {
           console.log('Send vote to all Node Finish')
+          hashValue = response.data
           res.send('1')
         })
         
       } else if(response.data == '-1'){
         isThisNodeOk = false
+        hashValue = 'AAAA'
         res.send('-1')
       } else {
         res.send('0') 
       }
     })
     .catch(err => {
+      console.log(err)
       isThisNodeOk = false
+      hashValue = 'AAAA'
       res.send('-1')
     })
   }
@@ -194,6 +202,22 @@ app.get('/commit', (req, res) => {
       sender_d: req.query.sender_d,
       receiver_n: req.query.receiver_n,
       receiver_e: req.query.receiver_e,
+    })
+    .then(response => {
+      if(response.data.length > 2){
+        hashValue = response.data
+      } else if(response.data == '-1') {
+        console.log(err)
+        isThisNodeOk = false
+        hashValue = 'AAAA'
+        res.send('-1')
+      }
+    })
+    .catch(err => {
+      console.log(err)
+      isThisNodeOk = false
+      hashValue = 'AAAA'
+      res.send('-1')
     })
   }
 

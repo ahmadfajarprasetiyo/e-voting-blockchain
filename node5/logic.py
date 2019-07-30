@@ -61,6 +61,7 @@ def vote(sender_n, sender_e, sender_d, receiver_n, receiver_e):
       if not is_valid_block(i):
         valid = False
         print("File telah dimodifikasi pada block ke -", i)
+        return "-1"
         break
       
       i = i + 1
@@ -106,6 +107,9 @@ def vote(sender_n, sender_e, sender_d, receiver_n, receiver_e):
       hash_file.write(calculate_hash_block(i))
       hash_file.close()
       
-  return valid
+  if valid:
+    return get_lastest_hash()
+  else:
+    return "0"
 
 
