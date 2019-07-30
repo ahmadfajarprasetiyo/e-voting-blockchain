@@ -1,6 +1,11 @@
 from flask import Flask
 from flask import request
 import logic
+import json
+
+with open('config.json') as json_file:
+  data = json.load(json_file)
+  thisPort = data['computationPort']
 
 app = Flask(__name__)
 
@@ -14,7 +19,7 @@ def trx():
     receiver_n = int(content['receiver_n'])
     receiver_e = int(content['receiver_e'])
 
-    return logic.vote(sender_n, sender_e, sender_d, receiver_n, receiver_e):
+    return logic.vote(sender_n, sender_e, sender_d, receiver_n, receiver_e)
 
 @app.route('/get_hash', methods=['GET'])
 def get_hash():
@@ -23,6 +28,6 @@ def get_hash():
     return logic.get_lastest_hash()
 
 if __name__ == '__main__':
-    app.run(host='localhost', port=5001, debug=True)
+    app.run(host='localhost', port=thisPort, debug=True)
 
 

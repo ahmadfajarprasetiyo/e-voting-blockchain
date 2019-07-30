@@ -1,3 +1,4 @@
+const config = require('./config.json')
 const express = require('express')
 const axios = require('axios')
 const app = express()
@@ -24,7 +25,7 @@ const nodesComputation = [
   'http://localhost:5005',
 ]
 
-const thisNode = 0
+const thisNode = config.thisNode 
 const port = nodesProxy[thisNode]
 var leaderNode = -1
 
