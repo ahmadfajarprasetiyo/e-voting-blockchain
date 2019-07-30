@@ -1,0 +1,8 @@
+rm node2/main.py
+rm node3/main.py
+rm node4/main.py
+rm node5/main.py
+cp node1/main.py node2/main.py
+cp node1/main.py node3/main.py
+cp node1/main.py node4/main.py
+cp node1/main.py node5/main.py

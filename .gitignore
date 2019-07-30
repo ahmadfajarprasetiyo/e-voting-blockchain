@@ -12,3 +12,5 @@
 *.pri
 */*.pub
 */*.pri
+*/node_modules
+.DS_Store

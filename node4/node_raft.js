@@ -24,7 +24,7 @@ const nodesComputation = [
   'http://localhost:5005',
 ]
 
-const thisNode = 0
+const thisNode = 3
 const port = nodesProxy[thisNode]
 var leaderNode = -1
 
@@ -34,6 +34,10 @@ var randomIntervalSendBeat = Math.floor(Math.random() * 1000) + 2000;
 var hashValue = 'AAAA'
 var isThisNodeOk = true
 
+axios.get(nodesComputation[thisNode]+'/get_hash')
+  .then(response => {
+    hashValue = response.data
+  })
 
 function requestElection() {
   console.log('Request Election')
@@ -86,7 +90,8 @@ function requestBeat(){
 
 function functionInterval(){
   console.log('Call Interval Function')
-  if(isThisNodeOk){
+
+  if(isThisNodeOk && hashValue != 'AAAA'){
     if(leaderNode == thisNode){
       requestBeat() 
     } else {
@@ -125,7 +130,7 @@ app.get('/election', (req, res) => {
     console.log('Election Approve')
     res.send('1')
   }else{
-    console.log('Election Approve')
+    console.log('Election Rejected')
     res.send('0')
   }
 
@@ -139,5 +144,60 @@ app.get('/get_leader', (req, res) => {
   }
 })
 
+app.get('/vote', (req, res) => {
+  
+  if(thisNode == leaderNode){
+    axios.post(nodesComputation[thisNode] + '/trx', {
+      sender_n: req.query.sender_n,
+      sender_e: req.query.sender_e,
+      sender_d: req.query.sender_d,
+      receiver_n: req.query.receiver_n,
+      receiver_e: req.query.receiver_e,
+    })
+    .then(response => {
+      if(response.data == '1'){
+        for(var i=0; i< 5; i++){
+          if(thisNode != i){
+            requestPoll.push(
+              axios.get(nodes[i]+'/commit?sender_n='+req.query.sender_n+'&sender_e='+req.query.sender_e+'&sender_d='+req.query.sender_d+'&receiver_n='+req.query.receiver_n+'&receiver_e='+req.query.receiver_e)
+            )
+          }
+        }
+
+        Promise.all(requestPoll.map(p => p.catch(() => undefined)))
+        .then((responses) => {
+          console.log('Send vote to all Node Finish')
+          res.send('1')
+        })
+        
+      } else if(response.data == '-1'){
+        isThisNodeOk = false
+        res.send('-1')
+      } else {
+        res.send('0') 
+      }
+    })
+    .catch(err => {
+      isThisNodeOk = false
+      res.send('-1')
+    })
+  }
+
+
+})
+
+app.get('/commit', (req, res) => {
+  if(isThisNodeOk){
+    axios.post(nodesComputation[thisNode] + '/trx', {
+      sender_n: req.query.sender_n,
+      sender_e: req.query.sender_e,
+      sender_d: req.query.sender_d,
+      receiver_n: req.query.receiver_n,
+      receiver_e: req.query.receiver_e,
+    })
+  }
+
+  res.send('1')
+})
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))

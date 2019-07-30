@@ -19,6 +19,12 @@ def trx():
     else:
         return "0"
 
+@app.route('/get_hash', methods=['GET'])
+def get_hash():
+    print("Get Lastest Hash Value")
+
+    return logic.get_lastest_hash()
+
 if __name__ == '__main__':
     app.run(host='localhost', port=5005, debug=True)
 

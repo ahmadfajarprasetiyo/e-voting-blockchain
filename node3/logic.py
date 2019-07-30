@@ -43,7 +43,13 @@ def is_valid_block(n):
 def is_valid_private_key(n, e, d):
   return 10 == pow(pow(10, e, n), d, n)
 
+def get_lastest_hash():
+  i = 1
+  while os.path.isfile(str(i)+'.hash'):
+    i = i + 1 
 
+  hash_file = open(str(i-1)+".hash","r")
+  return hash_file.readline()
 
 def vote(sender_n, sender_e, sender_d, receiver_n, receiver_e):
   i = 1

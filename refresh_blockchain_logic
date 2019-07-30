@@ -1,0 +1,8 @@
+rm node2/logic.py
+rm node3/logic.py
+rm node4/logic.py
+rm node5/logic.py
+cp node1/logic.py node2/logic.py
+cp node1/logic.py node3/logic.py
+cp node1/logic.py node4/logic.py
+cp node1/logic.py node5/logic.py
