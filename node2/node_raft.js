@@ -72,6 +72,7 @@ function requestElection() {
 
 function requestBeat(){
   console.log('Give beat to node')
+  console.log(hashValue)
 
   var requestPoll = []
 
@@ -110,6 +111,7 @@ app.get('/leader', (req, res) => {
   timerForRequestElection = setInterval(functionInterval, randomIntervalElection)
   leaderNode = req.query.node
   console.log('Get Leader Beat')
+  console.log(hashValue)
 
   if(req.query.hash == hashValue){
     isThisNodeOk = true

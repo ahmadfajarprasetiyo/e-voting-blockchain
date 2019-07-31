@@ -28,7 +28,7 @@ def calculate_hash_block(n):
       
   if n > 1:
     n = n - 1
-    with open(str(n)+'.trx', 'rb') as afile:
+    with open(str(n)+'.hash', 'rb') as afile:
       buf = afile.read(BLOCKSIZE)
       while len(buf) > 0:
         hasher.update(buf)
@@ -37,8 +37,8 @@ def calculate_hash_block(n):
   return hasher.hexdigest()
 
 def is_valid_block(n):
-  hash_file = open(str(n)+".hash","r")
-  return hash_file.readline() == calculate_hash_block(n)
+  hash_file = open(str(n)+".hash","r").read().splitlines()
+  return hash_file[0] == calculate_hash_block(n)
 
 def is_valid_private_key(n, e, d):
   return 10 == pow(pow(10, e, n), d, n)
@@ -95,6 +95,7 @@ def vote(sender_n, sender_e, sender_d, receiver_n, receiver_e):
     with open(str(i)+'.res', 'w') as writeFile:
       writer = csv.writer(writeFile)
       writer.writerows(data_res)
+      writeFile.close()
       
     data_trx = [['sender_n', 'sender_e', 'receiver_n', 'receiver_e', 'digital_signature']]
     data_trx.append([sender_n, sender_e, receiver_n, receiver_e, pow(10,sender_d, sender_n)])
@@ -102,12 +103,13 @@ def vote(sender_n, sender_e, sender_d, receiver_n, receiver_e):
     with open(str(i)+'.trx', 'w') as writeFile:
       writer = csv.writer(writeFile)
       writer.writerows(data_trx)
+      writeFile.close()
       
-      hash_file = open(str(i)+".hash","w")
-      hash_file.write(calculate_hash_block(i))
-      hash_file.close()
+    hash_file = open(str(i)+".hash","w")
+    hash_file.write(calculate_hash_block(i))
+    hash_file.close()
       
-  if valid:
+  if valid and index_receiver > 0 and index_sender > 0:
     return get_lastest_hash()
   else:
     return "0"

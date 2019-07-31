@@ -2,7 +2,7 @@ from phe import paillier
 import pickle
 import os
 
-public_key, private_key = paillier.generate_paillier_keypair()
+public_key, private_key = paillier.generate_paillier_keypair(None, 1024)
 
 with open('key.pri','wb') as output:
   pickle.dump(private_key, output, pickle.HIGHEST_PROTOCOL)
